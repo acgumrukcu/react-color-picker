@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -26,6 +26,20 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+        server: ${{ secrets.FTP_SERVER}}
+        #server: "ftp://voiceofworkers.com"
+        user: ${{ secrets.FTP_USERNAME}}
+        #user: "u554220904.keyofcarbon.com"
+        # password: "Carbon2023_"
+        password: ${{ secrets.FTP_PASSWORD }}
+        local_dir: "./public_html"
+        # Bu kısımda ayarlar olacak
+    - run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
     - run: npm run build --if-present
-    - run: npm test
