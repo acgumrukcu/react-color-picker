@@ -16,15 +16,9 @@ jobs:
     
     steps:
     - name: 🚚 Get latest code
-      uses: actions/checkout@v2
-
+      uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Copy .env.prod.example to .env
-      run: cp .env.prod.example .env
+      uses: actions/setup-node@v3
 
     - name: 🔨 Build Project 
       run: |
@@ -40,7 +34,7 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: build/
+        local-dir: "public_html/"
 
   # build:
 
