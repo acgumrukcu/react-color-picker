@@ -36,7 +36,7 @@ jobs:
         password: ${{ secrets.FTP_PASSWORD }}
         protocol: ftps
         local-dir: "build/"
-        server-dir: "./public-html"
+        server-dir: "./public-html/"
 
   # build:
 
