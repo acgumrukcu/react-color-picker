@@ -31,7 +31,7 @@ jobs:
       run: find build/ -print
       
     - name: 📂 Sync files
-      uses: actions/setup-node@v3
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.4
       with:
         server: ${{ secrets.FTP_SERVER}}
         user: ${{ secrets.FTP_USERNAME}}
